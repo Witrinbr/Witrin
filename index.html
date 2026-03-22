@@ -394,28 +394,24 @@ const form=document.getElementById('witrinForm');
 const fd=new FormData(form);
 const data=Object.fromEntries(fd.entries());
 
-const BASE='https://docs.google.com/forms/d/e/1FAIpQLSd8Af_EHJjDIjpROtQCQGnnuWUjSELPlucLI0oXUcXCyKYRsA/formResponse';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxJJRAp9Us-xWAlFngwv_VGdpPVaYkYlW6EtPz2psNkIIMyAiftvQR1FDs_IR25OR3L/exec';
 
-// Build FormData with Google Forms entry IDs
-const gfd=new FormData();
-gfd.append('entry.2005620554',data.nome||'');
-gfd.append('entry.1045781291',data.email||'');
-gfd.append('entry.1065046570',data.whatsapp||'');
-gfd.append('entry.1166974658',data.estabelecimento||'');
-gfd.append('entry.839337160',data.cidade_estado||'');
-gfd.append('entry.2026071224',data.tipo||'');
-gfd.append('entry.1383211261',data.itens_cardapio||'');
-gfd.append('entry.668280545',data.ticket_medio||'');
-gfd.append('entry.752309248',data.cardapio_digital||'');
-gfd.append('entry.1570308928',data.desafio||'');
-gfd.append('entry.1477966234',data.atencao||'');
-gfd.append('entry.1761380066',data.horario||'');
-
-// Send via POST with FormData (no-cors)
-fetch(BASE,{
+fetch(SCRIPT_URL,{
 method:'POST',
-mode:'no-cors',
-body:gfd
+body:JSON.stringify({
+nome:data.nome||'',
+email:data.email||'',
+whatsapp:data.whatsapp||'',
+estabelecimento:data.estabelecimento||'',
+cidade_estado:data.cidade_estado||'',
+tipo:data.tipo||'',
+itens_cardapio:data.itens_cardapio||'',
+ticket_medio:data.ticket_medio||'',
+cardapio_digital:data.cardapio_digital||'',
+desafio:data.desafio||'',
+atencao:data.atencao||'',
+horario:data.horario||''
+})
 }).catch(()=>{});
 
 // Hide everything except thank you
